@@ -1,0 +1,12 @@
+{
+  "name": "my-libs",
+  "author": "sitek94",
+  "license": "MIT",
+  "scripts": {
+    "dev": "npx serve",
+    "build": "node build.js"
+  },
+  "devDependencies": {
+    "esbuild": "^0.12.0"
+  }
+}
