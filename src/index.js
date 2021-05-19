@@ -1,6 +1,3 @@
-console.log('Hello world');
+import { fn } from './test';
 
-console.log('hehehehl');
-console.log('hehehehl');
-console.log('hehehehl');
-console.log('hehehehl');
+console.log(fn());
