@@ -18,15 +18,20 @@ export function createElement(type, props, ...children) {
   return reactElement;
 }
 
-let state;
+let states = [];
+let stateIndex = 0;
 
-export function useState(initialState) {
-  state = state || initialState;
+export function useState<S>(initialState): [S, (S) => void] {
+  const currentIndex = stateIndex;
+
+  states[currentIndex] = states[currentIndex] || initialState;
 
   const setState = newState => {
-    state = newState;
-    rerender();
+    states[currentIndex] = newState;
+    rerender(() => (stateIndex = 0));
   };
 
-  return [state, setState];
+  stateIndex++;
+
+  return [states[currentIndex], setState];
 }
