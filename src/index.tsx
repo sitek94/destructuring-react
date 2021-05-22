@@ -1,22 +1,28 @@
-const React = {
-  createElement(type: string, props, children) {
-    const element = document.createElement(type);
+import * as React from './react';
+import * as ReactDOM from './react-dom';
 
-    if (typeof children === 'string') {
-      element.innerHTML = children;
-    }
+function App() {
+  return (
+    <div className="app">
+      <h1>Hello, person!</h1>
+      <p>{1324414}</p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis,
+        laborum ducimus. Quasi reiciendis quidem ex eos, nisi officiis! Neque
+        quaerat blanditiis aut optio corporis esse animi vero repellat
+        repudiandae omnis.
+      </p>
+      <Button />
+    </div>
+  );
+}
 
-    return element;
-  },
-};
+function Button() {
+  return (
+    <button className="btn" onclick={() => console.log('Hello button')}>
+      Click me
+    </button>
+  );
+}
 
-const ReactDOM = {
-  render(element, node: HTMLElement) {
-    console.log(element);
-    node.appendChild(element);
-  },
-};
-
-const app = <h1>App</h1>;
-
-ReactDOM.render(app, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
