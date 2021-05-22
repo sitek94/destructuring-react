@@ -1,11 +1,13 @@
 import * as React from './react';
-import * as ReactDOM from './react-dom';
+import { render } from './react-dom';
 
 function App() {
+  const [name, setName] = React.useState('person');
+
   return (
     <div className="app">
-      <h1>Hello, person!</h1>
-      <p>{1324414}</p>
+      <h1>Name: {name}</h1>
+      <input type="text" onchange={e => setName(e.target.value)} />
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis,
         laborum ducimus. Quasi reiciendis quidem ex eos, nisi officiis! Neque
@@ -25,4 +27,15 @@ function Button() {
   );
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const root = document.getElementById('root');
+
+/**
+ * Super fast reconcilliation engine 🚀
+ */
+export function rerender() {
+  root.firstChild.remove();
+  render(<App />, root);
+}
+
+// Initial render
+render(<App />, document.getElementById('root'));
