@@ -16,14 +16,26 @@ function App() {
       <hr />
 
       <h2>Count: {count}</h2>
-      <button onclick={()=> setCount(count + 1)}>➕</button>
-      <button onclick={()=> setCount(count - 1)}>➖</button>
+      <button onclick={() => setCount(count + 1)}>➕</button>
+      <button onclick={() => setCount(count - 1)}>➖</button>
       <hr />
 
       <h2>Time: {date.toLocaleTimeString()}</h2>
       <button onclick={() => setDate(new Date())}>Update time</button>
+      <hr />
+
+      <RandomPhoto />
     </div>
   );
+}
+
+function RandomPhoto() {
+  const photoUrl = React.createResource(
+    () => fetch('https://picsum.photos/300').then(res => res.url),
+    'photo-url',
+  );
+
+  return <img src={photoUrl} alt="Random" />;
 }
 
 const root = document.getElementById('root');
@@ -31,8 +43,8 @@ const root = document.getElementById('root');
 /**
  * Super fast reconcilliation engine 🚀
  */
-export function rerender(resetIndexCb: () => void) {
-  resetIndexCb();
+export function rerender(resetIndexCb?: () => void) {
+  resetIndexCb?.();
   root.firstChild.remove();
   render(<App />, root);
 }
