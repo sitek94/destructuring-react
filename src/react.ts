@@ -47,30 +47,30 @@ export function createElement(type, props, ...children) {
 }
 
 let states = [];
-let stateIndex = 0;
+let stateCursor = 0;
 
 /**
  * useState
  */
 export function useState<S>(initialState): [S, (S) => void] {
-  const currentIndex = stateIndex;
+  const localCursor = stateCursor;
 
   // Use initial state only if there is no state yet
-  states[currentIndex] = states[currentIndex] || initialState;
+  states[localCursor] = states[localCursor] || initialState;
 
   const setState = newState => {
-    states[currentIndex] = newState;
+    states[localCursor] = newState;
 
-    // Rerender the component when state has changed and set stateIndex back to 0.
-    rerender(() => (stateIndex = 0));
+    // Rerender the component when state has changed and set stateCursor back to 0.
+    rerender(() => (stateCursor = 0));
   };
 
-  // Increment stateIndex so that next call to useState will be responsible for
+  // Increment stateCursor so that next call to useState will be responsible for
   // next piece of state
-  stateIndex++;
+  stateCursor++;
 
   // Return state, and setter
-  return [states[currentIndex], setState];
+  return [states[localCursor], setState];
 }
 
 const promiseCache = new Map();
