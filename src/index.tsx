@@ -29,6 +29,7 @@ function App() {
   );
 }
 
+// An example component that uses concurrent mode
 function RandomPhoto() {
   const photoUrl = React.createResource(
     () => fetch('https://picsum.photos/300').then(res => res.url),
