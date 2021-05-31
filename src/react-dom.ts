@@ -1,13 +1,16 @@
 type ReactElement = {
-  type: string
+  type: string;
   props?: {
     [propName: string]: any;
-  }
-}
+  };
+};
 
-type ElementType = ReactElement | string | number
+type ElementType = ReactElement | string | number | null;
 
 export function render(element: ElementType, container: HTMLElement) {
+  if (element === null) {
+    return;
+  }
 
   // Either string or number - create and append text node
   if (typeof element === 'string' || typeof element === 'number') {
